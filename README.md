@@ -4,6 +4,9 @@
 **Difficulty:** Medium  
 **Topics:** Stack, Greedy, String  
 **Tags:** Two Pointers, String Manipulation  
+![Leetcode](https://img.shields.io/badge/Leetcode-1717-blue)
+![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
+![Language](https://img.shields.io/badge/Language-Java-orange)
 
 ![Status](https://img.shields.io/badge/Status-Solved-brightgreen.svg)
 ![Language](https://img.shields.io/badge/Language-Java-blue.svg)
