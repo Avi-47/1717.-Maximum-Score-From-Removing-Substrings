@@ -27,16 +27,38 @@ You may perform these operations any number of times in any order. Return the **
 
 Input: s = "cdbcbbaaabab", x = 4, y = 5
 Output: 19
-Explanation: Remove "ba" -> "cdbcbbaabab" -> Remove "ab" -> "cdbcbbaab" -> ...
-
+Explanation:
+- Remove the "ba" underlined in "cdbcbbaaabab". Now, s = "cdbcbbaaab" and 5 points are added to the score.
+- Remove the "ab" underlined in "cdbcbbaaab". Now, s = "cdbcbbaa" and 4 points are added to the score.
+- Remove the "ba" underlined in "cdbcbbaa". Now, s = "cdbcba" and 5 points are added to the score.
+- Remove the "ba" underlined in "cdbcba". Now, s = "cdbc" and 5 points are added to the score.
+Total score = 5 + 4 + 5 + 5 = 19.
 
 ---
 
-## 🚀 Solution Idea
+🚀 Solution Idea
+The problem requires us to maximize the total score by repeatedly removing either the substring "ab" (worth x points) or "ba" (worth y points) from the string s. Since both operations can be performed any number of times and in any order, the order of operations will significantly affect the final score.
 
-- Use a greedy approach: always prioritize removing the substring with the **higher score** first.
-- Use a helper function `func(...)` that processes one type of substring and accumulates points.
-- Iterate the string, counting and resolving character pairs, and then process the remaining characters for the second operation.
+Here's the step-by-step logic:
+🔧 Greedy Strategy
+Always prioritize removing the substring with the higher score first.
+For example, if x > y, remove "ab" first, since it's more valuable.
+If y > x, remove "ba" first.
+This greedy strategy ensures we capture the maximum points from high-value patterns before potentially breaking them by removing lower-value ones.
+
+🛠️ Helper Function func(...)
+We define a helper function func(sb, f, s, x, y) that:
+Scans the string left to right using a counter-style logic.
+When it finds the matching pattern (either "ab" or "ba" depending on f and s), it adds the corresponding score (x) and continues.
+If the character is neither f nor s, we compute how many valid pairs (in reverse order) can still be removed and reset the counters.
+
+🔄 How It Works
+Convert the input string s to a StringBuilder (to allow in-place edits).
+Based on whether x > y or x < y, call func(...) with the appropriate pair ("ab" or "ba" first).
+After one full pass, the remaining characters may still contain the opposite substring.
+Call func(...) again to process the remaining pattern and add those points too.
+Return the total score.
+This approach runs in O(n) time and O(1) space (excluding the input string), making it both efficient and clean.
 
 ---
 
