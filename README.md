@@ -1,72 +1,82 @@
-# 🧮 1717. Maximum Score From Removing Substrings
-[Leetcode Link 🔗](https://leetcode.com/problems/maximum-score-from-removing-substrings/)  
+# 1717. Maximum Score From Removing Substrings
 
-![Leetcode](https://img.shields.io/badge/Leetcode-1717-blue)
-![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
-![Language](https://img.shields.io/badge/Language-Java-orange)
+[Link to Problem](https://leetcode.com/problems/maximum-score-from-removing-substrings/)  
+**Difficulty:** Medium  
+**Topics:** Stack, Greedy, String  
+**Tags:** Two Pointers, String Manipulation  
+
+![Status](https://img.shields.io/badge/Status-Solved-brightgreen.svg)
+![Language](https://img.shields.io/badge/Language-Java-blue.svg)
+
+---
+
+## 🧠 Problem Summary
+
+You are given a string `s` and two integers `x` and `y`.
+
+You can perform two operations:
+
+1. Remove the substring `"ab"` and gain `x` points.
+2. Remove the substring `"ba"` and gain `y` points.
+
+You may perform these operations any number of times in any order. Return the **maximum points** you can gain after applying the operations optimally.
+
+---
+
+## 🔍 Examples
+
+Input: s = "cdbcbbaaabab", x = 4, y = 5
+Output: 19
+Explanation: Remove "ba" -> "cdbcbbaabab" -> Remove "ab" -> "cdbcbbaab" -> ...
 
 
 ---
 
-## 📄 Problem Statement
+## 🚀 Solution Idea
 
-You are given a string `s` and two integers `x` and `y`. You can perform two types of operations any number of times:
-
-- Remove substring `"ab"` and gain `x` points.
-- Remove substring `"ba"` and gain `y` points.
-
-Return the **maximum points** you can gain after applying the above operations on `s`.
+- Use a greedy approach: always prioritize removing the substring with the **higher score** first.
+- Use a helper function `func(...)` that processes one type of substring and accumulates points.
+- Iterate the string, counting and resolving character pairs, and then process the remaining characters for the second operation.
 
 ---
 
-## 💡 Approach
-
-- The idea is to **greedily remove the substring** that gives more score first.
-- We define a helper function `func(sb, f, s, x, y)` which:
-  - Traverses the string and counts the number of matching `f` before `s`.
-  - Adds score `x` when a valid substring (`f` followed by `s`) is found.
-  - When encountering other characters, we remove all remaining `fs` and `ss` pairs, gaining `y` points.
-- If `x > y`, we remove `"ab"` first, otherwise remove `"ba"` first.
-
-This ensures we always take the **highest scoring substring first** for maximum gain.
-
----
-
-## ✅ Code (Java)
+## 🧾 Code
 
 ```java
 class Solution {
-    public int func(StringBuilder sb, char f, char s, int x, int y) {
+    public int func(StringBuilder sb,char f, char s, int x, int y){
         int i = 0;
         int count = 0;
         int a = 0;
         int b = 0;
-        while (i < sb.length()) {
-            if (sb.charAt(i) == f) {
-                a++;
-            } else if (sb.charAt(i) == s) {
-                if (a > 0) {
-                    count += x;
+        while(i<sb.length()){
+            if(sb.charAt(i)==f) a++;
+            else if(sb.charAt(i)==s){
+                if(a>0){
+                    count+=x;
                     a--;
-                } else {
-                    b++;
-                }
-            } else {
-                count += Math.min(a, b) * y;
-                a = 0;
-                b = 0;
+                }else b++;
+            }else{
+                count+= Math.min(a,b)*y;
+                a=0;
+                b=0;
             }
             i++;
         }
-        if (a > 0) count += Math.min(a, b) * y;
+        if(a>0) count+= Math.min(a,b)*y;
         return count;
     }
 
     public int maximumGain(String s, int x, int y) {
         StringBuilder sb = new StringBuilder(s);
-        if (x > y)
-            return func(sb, 'a', 'b', x, y);
-        else
-            return func(sb, 'b', 'a', y, x);
+        int c = 0;
+        if(x>y) c = func(sb,'a','b',x,y);
+        else c = func(sb,'b','a',y,x);
+        return c;
     }
 }
+🧠 Complexity Analysis
+Time Complexity: O(n)
+
+Space Complexity: O(1) (Ignoring output and input, and only using constant extra space)
+
