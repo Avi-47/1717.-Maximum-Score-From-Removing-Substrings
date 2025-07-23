@@ -1,8 +1,6 @@
-# 1717.-Maximum-Score-From-Removing-Substrings
-
 # 🧮 1717. Maximum Score From Removing Substrings
-
 [Leetcode Link 🔗](https://leetcode.com/problems/maximum-score-from-removing-substrings/)  
+
 ![Leetcode](https://img.shields.io/badge/Leetcode-1717-blue)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 ![Language](https://img.shields.io/badge/Language-Java-orange)
