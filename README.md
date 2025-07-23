@@ -34,22 +34,27 @@ Total score = 5 + 4 + 5 + 5 = 19.
 ---
 
 🚀 Solution Idea
+
 The problem requires us to maximize the total score by repeatedly removing either the substring "ab" (worth x points) or "ba" (worth y points) from the string s. Since both operations can be performed any number of times and in any order, the order of operations will significantly affect the final score.
 
 Here's the step-by-step logic:
+
 🔧 Greedy Strategy
+
 Always prioritize removing the substring with the higher score first.
 For example, if x > y, remove "ab" first, since it's more valuable.
 If y > x, remove "ba" first.
 This greedy strategy ensures we capture the maximum points from high-value patterns before potentially breaking them by removing lower-value ones.
 
 🛠️ Helper Function func(...)
+
 We define a helper function func(sb, f, s, x, y) that:
 Scans the string left to right using a counter-style logic.
 When it finds the matching pattern (either "ab" or "ba" depending on f and s), it adds the corresponding score (x) and continues.
 If the character is neither f nor s, we compute how many valid pairs (in reverse order) can still be removed and reset the counters.
 
 🔄 How It Works
+
 Convert the input string s to a StringBuilder (to allow in-place edits).
 Based on whether x > y or x < y, call func(...) with the appropriate pair ("ab" or "ba" first).
 After one full pass, the remaining characters may still contain the opposite substring.
