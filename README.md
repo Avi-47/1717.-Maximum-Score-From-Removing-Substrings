@@ -5,9 +5,6 @@
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 ![Language](https://img.shields.io/badge/Language-Java-orange)
 ![Status](https://img.shields.io/badge/Status-Solved-brightgreen.svg)
-
-**Difficulty:** Medium   **Topics:** Stack, Greedy, String   **Tags:** Two Pointers, String Manipulation  
-
 ---
 
 ## 🧠 Problem Summary
